@@ -8,25 +8,25 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class ProgressActivity extends AppCompatActivity {
     private String[] namesArr = new String[]{"Josh", "John", "George", "Bob", "Alex"};
-    private GridView gridView;
-
+    private ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_progress);
 
-        gridView = (GridView) findViewById(R.id.gridView);
+        listView = (ListView) findViewById(R.id.gridView);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.task_design, R.id.task_name, namesArr);
-        gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this, (String)gridView.getItemAtPosition(i), Toast.LENGTH_LONG).show();
+                Toast.makeText(ProgressActivity.this, (String)listView.getItemAtPosition(i), Toast.LENGTH_LONG).show();
             }
         });
     }
