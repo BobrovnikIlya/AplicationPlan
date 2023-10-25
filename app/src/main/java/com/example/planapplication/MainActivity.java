@@ -39,4 +39,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProgressActivity.class);
         startActivity(intent);
     }
+    public void goDate(View v){
+        Intent intent = new Intent(this, DateActivity.class);
+        startActivity(intent);
+    }
 }

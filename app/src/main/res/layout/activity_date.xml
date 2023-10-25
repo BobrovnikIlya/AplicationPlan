@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".DateActivity">
 
     <RelativeLayout
         android:id="@+id/upper_bg"
@@ -34,33 +34,8 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/chiper"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_below="@+id/upper_bg">
-        <CheckBox
-            android:id="@+id/chip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="10dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Включить выполненые"
-            android:textColor="@color/blue"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <GridView
-        android:id="@+id/gridView"
+    <CalendarView
+        android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnWidth="100dp"
@@ -69,7 +44,7 @@
         android:numColumns="2"
         android:stretchMode="columnWidth"
         android:verticalSpacing="5dp"
-        android:layout_below="@+id/chiper"
+        android:layout_below="@+id/upper_bg"
         android:layout_above="@+id/bottom_menu"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="20dp"/>
