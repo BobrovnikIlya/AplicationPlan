@@ -38,29 +38,36 @@
         style="@style/Widget.Material3.Button"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginHorizontal="18sp"
-        android:backgroundTint="@color/blue"
-        android:layout_marginStart="300dp"
-        android:layout_marginBottom="20dp"
         android:layout_above="@+id/bottom_menu"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="18sp"
+        android:layout_marginStart="300dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/blue"
+        android:onClick="goAdd"
         android:text="+"
         android:textSize="40dp" />
 
-    <ListView
-        android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnWidth="100dp"
-        android:gravity="center"
-        android:horizontalSpacing="2dp"
-        android:numColumns="2"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp"
-        android:layout_below="@+id/upper_bg"
-        android:layout_above="@+id/bottom_menu"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="20dp">
-    </ListView>
+        <ListView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_menu"
+            android:layout_below="@+id/upper_bg"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="22dp"
+            android:columnWidth="100dp"
+            android:gravity="center"
+            android:horizontalSpacing="2dp"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp">
+
+        </ListView>
+
     <LinearLayout
         android:id="@+id/bottom_menu"
         android:layout_width="match_parent"

@@ -30,7 +30,10 @@ public class ProgressActivity extends AppCompatActivity {
             }
         });
     }
-
+    public void goAdd(View v){
+        Intent intent = new Intent(this, AddActivity.class);
+        startActivity(intent);
+    }
     public void goHome(View v){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

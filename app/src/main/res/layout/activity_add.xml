@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".AddActivity">
 
     <RelativeLayout
         android:id="@+id/upper_bg"
@@ -18,7 +18,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Приложение планнер"
+            android:text="@string/changeNote"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -28,64 +28,65 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="50dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Ваш главный помощник"
+            android:text="@string/inputInfo"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/chiper"
-        android:orientation="horizontal"
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="506dp"
+        android:layout_above="@+id/bottom_menu"
+        android:layout_below="@+id/upper_bg"
+        android:layout_marginBottom="4dp"
         android:background="@color/white"
-        android:layout_below="@+id/upper_bg">
-        <CheckBox
-            android:id="@+id/chip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Выполненые"
-            android:textColor="@color/blue"
-            android:textSize="20sp" />
+        android:orientation="vertical">
 
         <EditText
-            android:id="@+id/findEt"
+            android:id="@+id/nameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:inputType="text"
             android:fontFamily="@font/montserrat_bold"
-            android:hint="@string/find"/>
+            android:inputType="text"
+            android:text="@string/nameTask"
+            android:textColor="@color/gray" />
+
+        <EditText
+            android:id="@+id/descriptionEt"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_bold"
+            android:inputType="textMultiLine"
+            android:text="@string/descriptionTask"
+            android:textColor="@color/gray" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/chooseDate"
+            android:textColor="@color/blue"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+        <CalendarView
+            android:id="@+id/calendarView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp"
+            />
+
+
     </LinearLayout>
 
-    <GridView
-        android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnWidth="100dp"
-        android:gravity="center"
-        android:horizontalSpacing="2dp"
-        android:numColumns="2"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp"
-        android:layout_below="@+id/chiper"
-        android:layout_above="@+id/bottom_menu"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="20dp">
-    </GridView>
     <LinearLayout
         android:id="@+id/bottom_menu"
         android:layout_width="match_parent"
@@ -95,26 +96,19 @@
         android:background="@color/purple">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="18sp"
-            android:backgroundTint="@color/blue"
-            android:onClick="goHome"
-            android:text="Главная" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/blue"
-            android:onClick="goDate"
-            android:text="Календарь" />
-
-        <Button
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="18sp"
             android:backgroundTint="@color/blue"
             android:onClick="goProgress"
-            android:text="Прогресс" />
+            android:text="@string/back" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue"
+            android:layout_marginStart="60dp"
+            android:onClick="goDate"
+            android:text="@string/save" />
     </LinearLayout>
 </RelativeLayout>
