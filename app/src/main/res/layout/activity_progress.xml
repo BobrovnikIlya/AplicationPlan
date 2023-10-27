@@ -18,7 +18,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Приложение планнер"
+            android:text="@string/nameApplication"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -28,26 +28,11 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="50dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Ваш главный помощник"
+            android:text="@string/descriptionApplication"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
     </RelativeLayout>
-
-    <Button
-        style="@style/Widget.Material3.Button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_above="@+id/bottom_menu"
-        android:layout_alignParentEnd="true"
-        android:layout_marginHorizontal="18sp"
-        android:layout_marginStart="300dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/blue"
-        android:onClick="goAdd"
-        android:text="+"
-        android:textSize="40dp" />
 
         <ListView
             android:id="@+id/gridView"
@@ -64,9 +49,21 @@
             android:horizontalSpacing="2dp"
             android:numColumns="2"
             android:stretchMode="columnWidth"
-            android:verticalSpacing="5dp">
-
-        </ListView>
+            android:verticalSpacing="5dp"/>
+        <Button
+            style="@style/Widget.Material3.Button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@+id/bottom_menu"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="18sp"
+            android:layout_marginStart="300dp"
+            android:layout_marginEnd="11dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/blue"
+            android:onClick="goAdd"
+            android:text="+"
+            android:textSize="40dp" />
 
     <LinearLayout
         android:id="@+id/bottom_menu"
@@ -82,14 +79,14 @@
             android:layout_marginHorizontal="18sp"
             android:backgroundTint="@color/blue"
             android:onClick="goHome"
-            android:text="Главная" />
+            android:text="@string/homeButton" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue"
             android:onClick="goDate"
-            android:text="Календарь" />
+            android:text="@string/colendaryButton" />
 
         <Button
             android:layout_width="wrap_content"
@@ -97,6 +94,6 @@
             android:layout_marginHorizontal="18sp"
             android:backgroundTint="@color/blue"
             android:onClick="goProgress"
-            android:text="Прогресс" />
+            android:text="@string/progressButton" />
     </LinearLayout>
 </RelativeLayout>

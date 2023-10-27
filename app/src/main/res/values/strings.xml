@@ -8,4 +8,10 @@
     <string name="descriptionTask">Описание задачи</string>
     <string name="chooseDate">Выберите дату сдачи</string>
     <string name="find">Поиск</string>
+    <string name="nameApplication">Приложение планер</string>
+    <string name="descriptionApplication">Ваш главный помощник</string>
+    <string name="homeButton">Главная</string>
+    <string name="colendaryButton">Календарь</string>
+    <string name="progressButton">Прогресс</string>
+    <string name="Done">Выполненые</string>
 </resources>

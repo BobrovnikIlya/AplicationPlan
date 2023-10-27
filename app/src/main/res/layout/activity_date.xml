@@ -18,7 +18,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Приложение планнер"
+            android:text="@string/nameApplication"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -28,7 +28,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="50dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Ваш главный помощник"
+            android:text="@string/descriptionApplication"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
@@ -62,14 +62,14 @@
             android:layout_marginHorizontal="18sp"
             android:backgroundTint="@color/blue"
             android:onClick="goHome"
-            android:text="Главная" />
+            android:text="@string/homeButton" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue"
             android:onClick="goDate"
-            android:text="Календарь" />
+            android:text="@string/colendaryButton" />
 
         <Button
             android:layout_width="wrap_content"
@@ -77,6 +77,6 @@
             android:layout_marginHorizontal="18sp"
             android:backgroundTint="@color/blue"
             android:onClick="goProgress"
-            android:text="Прогресс" />
+            android:text="@string/progressButton" />
     </LinearLayout>
 </RelativeLayout>
