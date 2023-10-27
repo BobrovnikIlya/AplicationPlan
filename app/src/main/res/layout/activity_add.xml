@@ -98,16 +98,16 @@
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="18sp"
+            android:layout_marginHorizontal="5sp"
             android:backgroundTint="@color/blue"
             android:onClick="goProgress"
-            android:text="@string/back" />
+            android:text="@string/progressButton" />
 
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="43dp"
             android:onClick="goDate"
             android:text="@string/save" />
     </LinearLayout>

@@ -5,26 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
-public class DateActivity extends AppCompatActivity {
-
+public class DayActivity extends AppCompatActivity {
+    private ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_date);
-    }
+        setContentView(R.layout.activity_day);
 
-    public void goHome(View v){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        //listView = (ListView) findViewById(R.id.listViews);
+
+
     }
-    public void goProgress(View v){
-        Intent intent = new Intent(this, ProgressActivity.class);
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
     }
     public void goDate(View v){
         Intent intent = new Intent(this, DateActivity.class);
         startActivity(intent);
     }
-
 }

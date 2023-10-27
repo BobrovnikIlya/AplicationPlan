@@ -2,8 +2,8 @@
     <string name="app_name">PlanApplication</string>
     <string name="save">Сохранить</string>
     <string name="back">Назад</string>
-    <string name= "changeNote">Редактировать запись</string>
-    <string name= "inputInfo">Введите данные</string>
+    <string name="changeNote">Редактировать запись</string>
+    <string name="inputInfo">Введите данные</string>
     <string name="nameTask">Название задачи</string>
     <string name="descriptionTask">Описание задачи</string>
     <string name="chooseDate">Выберите дату сдачи</string>
@@ -14,4 +14,6 @@
     <string name="colendaryButton">Календарь</string>
     <string name="progressButton">Прогресс</string>
     <string name="Done">Выполненые</string>
+    <string name="listDoneTasks">Список выполненных задач</string>
+    <string name="descriptionInfo">Для полного просмотра информации нажмите на задачу</string>
 </resources>

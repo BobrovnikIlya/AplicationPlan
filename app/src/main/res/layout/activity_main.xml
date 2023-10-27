@@ -97,7 +97,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="18sp"
+            android:layout_marginHorizontal="5sp"
             android:backgroundTint="@color/blue"
             android:onClick="goHome"
             android:text="@string/homeButton" />
@@ -105,6 +105,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="2sp"
             android:backgroundTint="@color/blue"
             android:onClick="goDate"
             android:text="@string/colendaryButton" />
@@ -112,7 +113,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="18sp"
+            android:layout_marginHorizontal="5sp"
             android:backgroundTint="@color/blue"
             android:onClick="goProgress"
             android:text="@string/progressButton" />
