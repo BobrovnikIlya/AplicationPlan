@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CalendarFragment">
+
+    <LinearLayout
+        android:id="@+id/chiper"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        >
+        <CalendarView
+            android:id="@+id/calendarV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnWidth="100dp"
+            android:gravity="center"
+            android:horizontalSpacing="2dp"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp"
+            android:layout_below="@+id/upper_bg"
+            android:layout_above="@+id/bottom_menu"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="20dp"/>
+    </LinearLayout>
+
+</FrameLayout>

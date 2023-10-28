@@ -77,7 +77,7 @@
             android:textAlignment="center"
             android:textSize="20sp" />
         <CalendarView
-            android:id="@+id/calendarView2"
+            android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
@@ -100,8 +100,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5sp"
             android:backgroundTint="@color/blue"
-            android:onClick="goProgress"
-            android:text="@string/progressButton" />
+            android:onClick="goBack"
+            android:text="@string/back" />
 
         <Button
             android:layout_width="150dp"
