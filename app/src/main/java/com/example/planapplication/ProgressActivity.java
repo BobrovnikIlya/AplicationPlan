@@ -18,17 +18,6 @@ public class ProgressActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
-
-        listView = (ListView) findViewById(R.id.gridView);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.task_design, R.id.task_name, namesArr);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(ProgressActivity.this, (String)listView.getItemAtPosition(i), Toast.LENGTH_LONG).show();
-            }
-        });
     }
     public void goAdd(View v){
         Intent intent = new Intent(this, AddActivity.class);

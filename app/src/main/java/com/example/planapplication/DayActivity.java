@@ -16,11 +16,16 @@ public class DayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
 
-        //listView = (ListView) findViewById(R.id.listViews);
-
+        listView = (ListView) findViewById(R.id.listViews);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                goAdd(view);
+            }
+        });
 
     }
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void goAdd(View v){
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
     }
