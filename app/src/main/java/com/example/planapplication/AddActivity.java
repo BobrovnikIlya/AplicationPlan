@@ -3,31 +3,61 @@ package com.example.planapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class AddActivity extends AppCompatActivity {
     public static boolean sw = false;
-    CalendarView calendarView;
+    private String selectedDate;
+    private CalendarView calendarView;
+    private EditText nameEt, descriptionEt;
+    private Button addBt;
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> taskList;
+    /*private DatabaseHelper databaseHelper;*/
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);
+        nameEt = (EditText) findViewById(R.id.nameEt);
+        descriptionEt = (EditText) findViewById(R.id.descriptionEt);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-                Toast.makeText(AddActivity.this, "Выбранная дата: " + selectedDate, Toast.LENGTH_SHORT).show();
+                selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
             }
         });
     }
-
+    public void Save(View v) {
+        MyDataBaseHelper myDB = new MyDataBaseHelper(AddActivity.this);
+        if(sw){
+            Intent intent = new Intent(AddActivity.this, DayActivity.class);
+            startActivity(intent);
+        }else {
+            MainActivity.numberFragment = 3;
+            myDB.addTask(nameEt.getText().toString().trim(),
+                    descriptionEt.getText().toString().trim(),
+                    selectedDate);
+            Intent intent = new Intent(AddActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
     public void goBack(View v) {
         if(sw){
             Intent intent = new Intent(this, DayActivity.class);
