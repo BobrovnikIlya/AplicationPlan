@@ -2,6 +2,7 @@ package com.example.planapplication;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -20,9 +21,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_DATE = "date";
-    private static final String  COLUMN_COMPLETE = "Complete";
-
-
+    private static final String COLUMN_COMPLETE = "Complete";
 
 
     public MyDataBaseHelper(@Nullable Context context) {
@@ -45,19 +44,32 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
-    void addTask( String taskName, String taskDescription, String taskDate){
+
+    void addTask(String taskName, String taskDescription, String taskDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_NAME,taskName);
+        cv.put(COLUMN_NAME, taskName);
         cv.put(COLUMN_DESCRIPTION, taskDescription);
-        cv.put(COLUMN_DATE,taskDate);
+        cv.put(COLUMN_DATE, taskDate);
 
         long result = db.insert(TABLE_NAME, null, cv);
-        if(result == -1){
+        if (result == -1) {
             Toast.makeText(context, "Ошибка добавления", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Toast.makeText(context, "Добавленно успешно", Toast.LENGTH_SHORT).show();
         }
     }
+
+    Cursor readAllData() {
+        String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
 }
+

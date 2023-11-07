@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     public void goDate(View v){
         setNewFragment(calendarFragment);
     }
-
     private void setNewFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frame_layout, fragment);

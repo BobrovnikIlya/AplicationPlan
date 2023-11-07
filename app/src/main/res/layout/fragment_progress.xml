@@ -11,8 +11,9 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         >
-        <ListView
-            android:id="@+id/listView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:paddingTop="?attr/actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="20dp"
@@ -24,7 +25,7 @@
             android:horizontalSpacing="2dp"
             android:stretchMode="columnWidth"
             android:verticalSpacing="5dp">
-        </ListView>
+        </androidx.recyclerview.widget.RecyclerView>
 
         <Button
             android:id="@+id/buttonAdd"

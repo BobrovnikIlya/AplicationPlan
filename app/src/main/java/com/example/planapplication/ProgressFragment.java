@@ -9,7 +9,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +28,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgressFragment extends Fragment{
-    Button buttonAdd;
-    private ListView listView;
-    private ArrayAdapter<String> adapter;
-    private ArrayList<String> taskList;
-    private DatabaseHelper databaseHelper;
+    private Button buttonAdd;
+    private RecyclerView recyclerView;
+    private MyDataBaseHelper myDB;
+    private CustomAdapter customAdapter;
+    private ArrayList<String> nameTask, dateTask, idTask, descriptionTask;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,15 +41,20 @@ public class ProgressFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_progress, null);
 
         buttonAdd = (Button) v.findViewById(R.id.buttonAdd);
-        listView = (ListView) v.findViewById(R.id.listView);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
 
-        taskList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(getActivity(), R.layout.task_design, taskList);
-        listView.setAdapter(adapter);
+        myDB = new MyDataBaseHelper(getContext());
 
-        databaseHelper = new DatabaseHelper(getActivity());
-        taskList.addAll(databaseHelper.getAllTasks());
-        adapter.notifyDataSetChanged();
+        nameTask = new ArrayList<>();
+        dateTask = new ArrayList<>();
+        idTask = new ArrayList<>();
+        descriptionTask = new ArrayList<>();
+
+        storeDateInArrays();
+
+        customAdapter = new CustomAdapter(getActivity(), nameTask, dateTask, idTask, descriptionTask);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,5 +64,17 @@ public class ProgressFragment extends Fragment{
             }
         });
         return v;
+    }
+
+    void storeDateInArrays(){
+        Cursor cursor = myDB.readAllData();
+
+        if (cursor.getCount() == 0){
+            Toast.makeText(getActivity(), "Нет данных", Toast.LENGTH_SHORT).show();
+        }else{
+            while(cursor.moveToNext()){
+                nameTask.add(cursor.getString(1));
+            }
+        }
     }
 }
