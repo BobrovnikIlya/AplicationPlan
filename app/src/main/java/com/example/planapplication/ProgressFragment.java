@@ -73,7 +73,10 @@ public class ProgressFragment extends Fragment{
             Toast.makeText(getActivity(), "Нет данных", Toast.LENGTH_SHORT).show();
         }else{
             while(cursor.moveToNext()){
+                idTask.add(cursor.getString(0));
                 nameTask.add(cursor.getString(1));
+                descriptionTask.add(cursor.getString(2));
+                dateTask.add(cursor.getString(3));
             }
         }
     }

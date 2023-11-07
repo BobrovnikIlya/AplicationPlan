@@ -39,6 +39,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         Log.d("Custom adapter", "Загрузка данных в recycler");
         holder.name_txt.setText(String.valueOf(nameTask.get(position)));
         holder.date_txt.setText(String.valueOf(dateTask.get(position)));
+        holder.percent_txt.setText(String.valueOf(50+"%"));
     }
 
     @Override
@@ -47,12 +48,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView date_txt, name_txt;
+        TextView date_txt, name_txt, percent_txt;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             date_txt = itemView.findViewById(R.id.date_txt);
             name_txt = itemView.findViewById(R.id.name_txt);
+            percent_txt = itemView.findViewById(R.id.percent_txt);
         }
     }
 }
