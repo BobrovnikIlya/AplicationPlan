@@ -24,7 +24,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_COMPLETE = "Complete";
 
 
-    public MyDataBaseHelper(@Nullable Context context) {
+    MyDataBaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -60,6 +60,20 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Добавленно успешно", Toast.LENGTH_SHORT).show();
         }
     }
+    void updateTask(String row_id, String taskName, String taskDescription, String taskDate){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        Log.d("Save", row_id + " "+taskName+" "+taskDescription);
+        cv.put(COLUMN_NAME, taskName);
+        cv.put(COLUMN_DESCRIPTION, taskDescription);
+        cv.put(COLUMN_DATE, taskDate);
+        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        if (result == -1) {
+            Toast.makeText(context, "Ошибка обновления", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Обновленно успешно", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     Cursor readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
@@ -75,7 +89,6 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     Cursor readDataInDay(String day) {
         Log.d("readDataInDay",day+"");
         String query = "SELECT * FROM " + TABLE_NAME+ " WHERE "+ COLUMN_DATE+" = '"+day+"'";
-        //String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;

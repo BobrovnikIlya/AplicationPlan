@@ -24,14 +24,13 @@ import java.util.Date;
 import java.util.Locale;
 
 public class AddActivity extends AppCompatActivity {
-    public static boolean sw = false;
+    EditText name_input, description_input, date_input;
     private String selectedDate;
     private CalendarView calendarView;
     private EditText nameEt, descriptionEt;
     private Button addBt;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> taskList;
-    /*private DatabaseHelper databaseHelper;*/
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +51,18 @@ public class AddActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
     public void Save(View v) {
         MyDataBaseHelper myDB = new MyDataBaseHelper(AddActivity.this);
-        if(sw){
+        myDB.addTask(nameEt.getText().toString().trim(),
+                descriptionEt.getText().toString().trim(),
+                selectedDate);
+        Intent intent = new Intent(AddActivity.this, MainActivity.class);
+        startActivity(intent);
+
+/*        if(sw){
             Intent intent = new Intent(AddActivity.this, DayActivity.class);
             startActivity(intent);
         }else {
@@ -63,15 +71,18 @@ public class AddActivity extends AppCompatActivity {
                     selectedDate);
             Intent intent = new Intent(AddActivity.this, MainActivity.class);
             startActivity(intent);
-        }
+        }*/
     }
     public void goBack(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+/*
         if(sw){
             Intent intent = new Intent(this, DayActivity.class);
             startActivity(intent);
         }else {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        }
+        }*/
     }
 }

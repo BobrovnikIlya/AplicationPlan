@@ -1,11 +1,14 @@
 package com.example.planapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +54,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.date_txt.setText(String.valueOf(dateTask.get(position)));
         if(MainActivity.numberFragment == 3)
             holder.percent_txt.setText(String.valueOf(50+"%"));
+        if(MainActivity.numberFragment == 2){
+            holder.mainLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, UpdateActivity.class);
+                    intent.putExtra("id", String.valueOf(idTask.get(position)));
+                    intent.putExtra("name", String.valueOf(nameTask.get(position)));
+                    intent.putExtra("description", String.valueOf(descriptionTask.get(position)));
+                    intent.putExtra("date", String.valueOf(dateTask.get(position)));
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override
@@ -60,12 +76,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView date_txt, name_txt, percent_txt;
+        LinearLayout mainLayout;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
             date_txt = itemView.findViewById(R.id.date_txt);
             name_txt = itemView.findViewById(R.id.name_txt);
             percent_txt = itemView.findViewById(R.id.percent_txt);
+            mainLayout = itemView.findViewById(R.id.mainLayout);
         }
     }
 }

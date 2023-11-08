@@ -37,7 +37,7 @@ public class ProgressFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        AddActivity.sw = false;
+        UpdateActivity.sw = false;
         View v = inflater.inflate(R.layout.fragment_progress, null);
 
         buttonAdd = (Button) v.findViewById(R.id.buttonAdd);

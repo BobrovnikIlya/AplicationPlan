@@ -26,7 +26,7 @@ public class DayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
 
-        AddActivity.sw = true;
+        UpdateActivity.sw = true;
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         myDB = new MyDataBaseHelper(DayActivity.this);
