@@ -66,10 +66,38 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
+
         if (db != null) {
             cursor = db.rawQuery(query, null);
         }
         return cursor;
     }
+    Cursor readDataInDay(String day) {
+        Log.d("readDataInDay",day+"");
+        String query = "SELECT * FROM " + TABLE_NAME+ " WHERE "+ COLUMN_DATE+" = '"+day+"'";
+        //String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        Log.d("readDataInDay","создали курсор и придали null ");
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        Log.d("readDataInDay",cursor.getCount()+"");
+        return cursor;
+    }
+
+/*    Cursor readNotCompleteData() {
+        String query = "SELECT * FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        Log.d("readAllData","создали курсор и придали null ");
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }*/
 }
 

@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private String[] namesArr = new String[]{"Josh", "John", "George", "Bob", "Alex"};
     public static int numberFragment = 1;
+    public static String day = "";
     private GridView gridView;
 
     HomeFragment homeFrag = new HomeFragment();
@@ -33,12 +34,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void goHome(View v){
+        MainActivity.numberFragment = 1;
         setNewFragment(homeFrag);
     }
     public void goProgress(View v){
+        MainActivity.numberFragment = 3;
         setNewFragment(progressFragment);
     }
     public void goDate(View v){
+        MainActivity.numberFragment = 2;
         setNewFragment(calendarFragment);
     }
     private void setNewFragment(Fragment fragment) {

@@ -24,6 +24,7 @@ public class CalendarFragment extends Fragment {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                MainActivity.day = dayOfMonth + "." + (month + 1) + "." + year;
                 goDay(view);
             }
         });

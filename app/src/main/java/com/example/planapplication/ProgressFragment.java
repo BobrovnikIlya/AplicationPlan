@@ -66,7 +66,7 @@ public class ProgressFragment extends Fragment{
         return v;
     }
 
-    void storeDateInArrays(){
+    private void storeDateInArrays(){
         Cursor cursor = myDB.readAllData();
 
         if (cursor.getCount() == 0){

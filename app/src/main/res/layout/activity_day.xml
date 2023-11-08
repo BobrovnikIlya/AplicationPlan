@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProgressActivity">
+    tools:context=".DayActivity">
 
     <RelativeLayout
         android:id="@+id/upper_bg"
@@ -34,22 +34,18 @@
 
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/listViews"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
+        android:background="@color/gray"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_menu"
-        android:layout_below="@+id/upper_bg"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="20dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="22dp"
-        android:columnWidth="100dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="48dp"
         android:gravity="center"
         android:horizontalSpacing="2dp"
-        android:numColumns="2"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp"/>
+        android:verticalSpacing="5dp">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:id="@+id/bottom_menu"

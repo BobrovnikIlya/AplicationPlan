@@ -41,18 +41,16 @@
             android:hint="@string/find"/>
     </LinearLayout>
 
-    <GridView
-        android:id="@+id/gridView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:layout_marginTop="70dp"
         android:columnWidth="100dp"
         android:gravity="center"
         android:horizontalSpacing="2dp"
-        android:numColumns="2"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp"
-        android:layout_below="@+id/chiper"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="70dp">
-    </GridView>
+        android:verticalSpacing="5dp">
+    </androidx.recyclerview.widget.RecyclerView>
 </FrameLayout>

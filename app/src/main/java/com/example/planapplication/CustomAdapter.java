@@ -29,8 +29,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.my_row, parent, false);
-        Log.d("Custom adapter", "Подключение стиля");
+        View view = inflater.inflate(R.layout.my_row, parent, false);;
+        switch (MainActivity.numberFragment){
+            case 1:
+                view = inflater.inflate(R.layout.task_design, parent, false);
+                break;
+            case 2:
+                view = inflater.inflate(R.layout.task_design2, parent, false);
+                break;
+            case 3:
+                view = inflater.inflate(R.layout.my_row, parent, false);
+                break;
+        }
         return new MyViewHolder(view);
     }
 
@@ -39,7 +49,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         Log.d("Custom adapter", "Загрузка данных в recycler");
         holder.name_txt.setText(String.valueOf(nameTask.get(position)));
         holder.date_txt.setText(String.valueOf(dateTask.get(position)));
-        holder.percent_txt.setText(String.valueOf(50+"%"));
+        if(MainActivity.numberFragment == 3)
+            holder.percent_txt.setText(String.valueOf(50+"%"));
     }
 
     @Override
