@@ -38,7 +38,7 @@ public class DayActivity extends AppCompatActivity {
 
         storeDateInArrays();
 
-        customAdapter = new CustomAdapter(DayActivity.this, nameTask, dateTask, idTask, descriptionTask);
+        customAdapter = new CustomAdapter(DayActivity.this,this, nameTask, dateTask, idTask, descriptionTask);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(DayActivity.this));
 
@@ -55,10 +55,6 @@ public class DayActivity extends AppCompatActivity {
                 dateTask.add(cursor.getString(3));
             }
         }
-    }
-    public void goAdd(View v){
-        Intent intent = new Intent(this, AddActivity.class);
-        startActivity(intent);
     }
     public void goDate(View v){
         Intent intent = new Intent(this, MainActivity.class);

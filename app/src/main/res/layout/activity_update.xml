@@ -84,13 +84,13 @@
             android:layout_marginTop="10dp"
             />
         <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:backgroundTint="@color/blue"
-        android:onClick="goBack"
-        android:text="Удалить" />
-
+            android:id="@+id/deleteBt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:backgroundTint="@color/blue"
+            android:onClick="delete"
+            android:text="Удалить" />
 
     </LinearLayout>
 
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:backgroundTint="@color/blue"
-            android:onClick="Save"
+            android:onClick="save"
             android:text="@string/save" />
     </LinearLayout>
 </RelativeLayout>

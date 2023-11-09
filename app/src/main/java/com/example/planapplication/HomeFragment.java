@@ -1,5 +1,6 @@
 package com.example.planapplication;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -14,7 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.GridView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,14 +26,20 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     private MyDataBaseHelper myDB;
+    Cursor cursor;
+    boolean check = false;
+    private Switch aSwitch;
     private CustomAdapter customAdapter;
-    private ArrayList<String> nameTask, dateTask, idTask, descriptionTask;
+    private ArrayList<String> nameTask, dateTask, idTask, descriptionTask, completeTask;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        UpdateActivity.sw = false;
         View v = inflater.inflate(R.layout.fragment_home, null);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        aSwitch = (Switch) v.findViewById(R.id.aSwitch);
 
         myDB = new MyDataBaseHelper(getContext());
 
@@ -37,17 +47,33 @@ public class HomeFragment extends Fragment {
         dateTask = new ArrayList<>();
         idTask = new ArrayList<>();
         descriptionTask = new ArrayList<>();
+        completeTask = new ArrayList<>();
 
         storeDateInArrays();
 
-        customAdapter = new CustomAdapter(getActivity(), nameTask, dateTask, idTask, descriptionTask);
-        recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        if (aSwitch != null) {
+            aSwitch.setOnCheckedChangeListener(this::onCheckedChanged);
+        }
 
         return v;
     }
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        check = isChecked;
+        storeDateInArrays();
+    }
     private void storeDateInArrays(){
-        Cursor cursor = myDB.readAllData();
+        idTask.clear();
+        nameTask.clear();
+        descriptionTask.clear();
+        dateTask.clear();
+        completeTask.clear();
+
+        if(check){
+            cursor = myDB.readCompleteHomeData();
+        }else{
+            cursor = myDB.readHomeData();
+        }
+
         if (cursor.getCount() == 0){
             Toast.makeText(getActivity(), "Нет данных", Toast.LENGTH_SHORT).show();
         }else{
@@ -56,7 +82,11 @@ public class HomeFragment extends Fragment {
                 nameTask.add(cursor.getString(1));
                 descriptionTask.add(cursor.getString(2));
                 dateTask.add(cursor.getString(3));
+                completeTask.add(cursor.getString(4));
             }
         }
+        customAdapter = new CustomAdapter(getActivity(), getContext(), nameTask, dateTask, idTask, descriptionTask);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 }

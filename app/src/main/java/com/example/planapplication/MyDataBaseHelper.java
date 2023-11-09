@@ -21,7 +21,12 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_DATE = "date";
-    private static final String COLUMN_COMPLETE = "Complete";
+    private static final String COLUMN_COMPLETE = "complete";
+
+    private static final String TABLE_NAME2 = "Accommodation";
+    private static final String COLUMN_ID_ACCOMMODATION = "id_accommodation";
+    private static final String COLUMN_ID_BASIC = "id_basic";
+    private static final String COLUMN_ID_CHILD = "id_child";
 
 
     MyDataBaseHelper(@Nullable Context context) {
@@ -35,13 +40,21 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
                 " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_NAME + " TEXT, "
                 + COLUMN_DESCRIPTION + " TEXT, "
-                + COLUMN_DATE + " TEXT);";
+                + COLUMN_DATE + " TEXT, "
+                + COLUMN_COMPLETE + " INTEGER DEFAULT 0);";
+        db.execSQL(query);
+
+        query = "CREATE TABLE " + TABLE_NAME2 +
+                " (" + COLUMN_ID_ACCOMMODATION + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_ID_BASIC + " INTEGER, "
+                + COLUMN_ID_CHILD + " INTEGER);";
         db.execSQL(query);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME2);
         onCreate(db);
     }
 
@@ -75,8 +88,34 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    Cursor readAllData() {
-        String query = "SELECT * FROM " + TABLE_NAME;
+    void deleteTask(String row_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME, "_id=?", new String[] {row_id});
+        if (result == -1) {
+            Toast.makeText(context, "Ошибка удаления", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Успешное удаление", Toast.LENGTH_SHORT).show();
+        }
+    }
+    Cursor readHomeData() {
+        String query = "SELECT * FROM " + TABLE_NAME +
+                " WHERE " + COLUMN_ID + " NOT IN (SELECT "+ COLUMN_ID_BASIC +" FROM "+TABLE_NAME2+")" +
+                " AND " + COLUMN_COMPLETE+ " = 0"+
+                " ORDER BY "+COLUMN_DATE+";";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+    Cursor readCompleteHomeData() {
+        String query = "SELECT * FROM " + TABLE_NAME +
+                " WHERE " + COLUMN_ID + " NOT IN (SELECT "+ COLUMN_ID_BASIC +" FROM "+TABLE_NAME2+")" +
+                " AND " + COLUMN_COMPLETE+ " = 1"+
+                " ORDER BY "+COLUMN_DATE+";";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -99,7 +138,29 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         Log.d("readDataInDay",cursor.getCount()+"");
         return cursor;
     }
+    Cursor readProgressDataBasic() {
+        String query = "SELECT * FROM " + TABLE_NAME +" WHERE " + COLUMN_ID + " NOT IN (SELECT "+ COLUMN_ID_CHILD +" FROM "+TABLE_NAME2+");";
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        Cursor cursor = null;
+
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+    Cursor readProgressDataChild(String id) {
+        String query = "SELECT * FROM " + TABLE_NAME +" WHERE " + COLUMN_ID +
+                " IN (SELECT "+ COLUMN_ID_CHILD +" FROM "+TABLE_NAME2+" WHERE "+COLUMN_ID_BASIC+" = "+ id +");";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
 /*    Cursor readNotCompleteData() {
         String query = "SELECT * FROM " + TABLE_NAME;
 

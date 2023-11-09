@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,7 +72,7 @@ public class UpdateActivity extends AppCompatActivity {
             Toast.makeText(this, "Нет данных", Toast.LENGTH_SHORT).show();
         }
     }
-    public void Save(View v) {
+    public void save(View v) {
         name = name_input.getText().toString().trim();
         description = description_input.getText().toString().trim();
 
@@ -80,7 +82,16 @@ public class UpdateActivity extends AppCompatActivity {
             Intent intent = new Intent(UpdateActivity.this, DayActivity.class);
             startActivity(intent);
         }else {
-
+            myDB = new MyDataBaseHelper(UpdateActivity.this);
+            myDB.updateTask(id, name, description, dateTask);
+            Intent intent = new Intent(UpdateActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
+    public void delete(View v) {
+        if(sw){
+            confirmDialog();
+        }else {
             Intent intent = new Intent(UpdateActivity.this, MainActivity.class);
             startActivity(intent);
         }
@@ -93,5 +104,25 @@ public class UpdateActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
+    }
+    void confirmDialog(){
+        AlertDialog.Builder  builder = new AlertDialog.Builder(this);
+        builder.setTitle("Удалить " +name+" ?");
+        builder.setMessage("Вы уверены, что хотите удалить "+name+" ?");
+        builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                myDB = new MyDataBaseHelper(UpdateActivity.this);
+                myDB.deleteTask(id);
+                Intent intent = new Intent(UpdateActivity.this, DayActivity.class);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.create().show();
     }
 }
