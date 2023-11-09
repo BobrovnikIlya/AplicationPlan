@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.frame_layout, fragment);
         ft.addToBackStack(null);
         ft.commit();
+        ProgressFragment.idBasic = null;
         ProgressFragment.isChild = false;
     }
 }

@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
-
     private Context context;
     private Activity activity;
     private ProgressFragment progressFragment;
@@ -89,7 +88,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 public void onClick(View v) {
                     ProgressFragment.isChild = true;
                     ProgressFragment.idBasic = idTask.get(position).toString();
-                    progressFragment.storeDateInArrays();
+                    Log.d("Adapter", "idBAsic =" + ProgressFragment.idBasic);
+                    if(progressFragment != null)
+                        progressFragment.storeDateInArrays();
                 }
             });
         }else{

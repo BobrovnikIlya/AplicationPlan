@@ -30,7 +30,7 @@ import java.util.List;
 
 public class ProgressFragment extends Fragment{
     public static boolean isChild = false;
-    public static String idBasic;
+    public static String idBasic = null;
     private Button buttonAdd;
     private LinearLayout linearLayout;
     private Cursor cursor;
@@ -73,6 +73,7 @@ public class ProgressFragment extends Fragment{
     }
 
     public void storeDateInArrays(){
+        Log.d("StoreData", "Вошел в метод");
         idTask.clear();
         nameTask.clear();
         descriptionTask.clear();
@@ -100,11 +101,7 @@ public class ProgressFragment extends Fragment{
             }
             Log.d("StoreData", "Заполнение");
         }
-        if(!isChild){
-            customAdapter = new CustomAdapter(this, getContext(), nameTask, dateTask, idTask, descriptionTask);
-        }else{
-            customAdapter = new CustomAdapter(getActivity(), getContext(), nameTask, dateTask, idTask, descriptionTask);
-        }
+        customAdapter = new CustomAdapter(this, getContext(), nameTask, dateTask, idTask, descriptionTask);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

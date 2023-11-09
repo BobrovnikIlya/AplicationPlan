@@ -76,34 +76,27 @@ public class UpdateActivity extends AppCompatActivity {
         name = name_input.getText().toString().trim();
         description = description_input.getText().toString().trim();
 
+        myDB = new MyDataBaseHelper(UpdateActivity.this);
+        myDB.updateTask(id, name, description, dateTask);
+        Intent intent;
         if(sw){
-            myDB = new MyDataBaseHelper(UpdateActivity.this);
-            myDB.updateTask(id, name, description, dateTask);
-            Intent intent = new Intent(UpdateActivity.this, DayActivity.class);
-            startActivity(intent);
+            intent = new Intent(UpdateActivity.this, DayActivity.class);
         }else {
-            myDB = new MyDataBaseHelper(UpdateActivity.this);
-            myDB.updateTask(id, name, description, dateTask);
-            Intent intent = new Intent(UpdateActivity.this, MainActivity.class);
-            startActivity(intent);
+            intent = new Intent(UpdateActivity.this, MainActivity.class);
         }
+        startActivity(intent);
     }
     public void delete(View v) {
-        if(sw){
             confirmDialog();
-        }else {
-            Intent intent = new Intent(UpdateActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
     }
     public void goBack(View v) {
+        Intent intent;
         if(sw){
-            Intent intent = new Intent(this, DayActivity.class);
-            startActivity(intent);
+            intent = new Intent(UpdateActivity.this, DayActivity.class);
         }else {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            intent = new Intent(UpdateActivity.this, MainActivity.class);
         }
+        startActivity(intent);
     }
     void confirmDialog(){
         AlertDialog.Builder  builder = new AlertDialog.Builder(this);
@@ -112,9 +105,17 @@ public class UpdateActivity extends AppCompatActivity {
         builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Intent intent;
                 myDB = new MyDataBaseHelper(UpdateActivity.this);
-                myDB.deleteTask(id);
-                Intent intent = new Intent(UpdateActivity.this, DayActivity.class);
+                if(sw){
+                    Log.d("delete", "just delete");
+                    myDB.deleteTask(id);
+                    intent = new Intent(UpdateActivity.this, DayActivity.class);
+                }else {
+                    Log.d("delete", "branch delete");
+                    myDB.deleteBranchTask(Integer.parseInt(id));
+                    intent = new Intent(UpdateActivity.this, MainActivity.class);
+                }
                 startActivity(intent);
             }
         });
