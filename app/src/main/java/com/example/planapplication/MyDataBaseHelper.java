@@ -54,20 +54,6 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME2);
         onCreate(db);
     }
-    void updateTask(String row_id, String taskName, String taskDescription, String taskDate){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        Log.d("Save", row_id + " "+taskName+" "+taskDescription);
-        cv.put(COLUMN_NAME, taskName);
-        cv.put(COLUMN_DESCRIPTION, taskDescription);
-        cv.put(COLUMN_DATE, taskDate);
-        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
-        if (result == -1) {
-            Toast.makeText(context, "Ошибка обновления", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Обновленно успешно", Toast.LENGTH_SHORT).show();
-        }
-    }
     Cursor readHomeData() {
         String query = "SELECT * FROM " + TABLE_NAME +
                 " WHERE " + COLUMN_ID + " NOT IN (SELECT "+ COLUMN_ID_BASIC +" FROM "+TABLE_NAME2+")" +
@@ -200,6 +186,32 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
             deleteTaskBranchRecursively(db, childTaskId);
         }
         cursor.close();
+    }
+    void updateTask(String row_id, String taskName, String taskDescription, String taskDate){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        Log.d("Save", row_id + " "+taskName+" "+taskDescription);
+        cv.put(COLUMN_NAME, taskName);
+        cv.put(COLUMN_DESCRIPTION, taskDescription);
+        cv.put(COLUMN_DATE, taskDate);
+        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        if (result == -1) {
+            Toast.makeText(context, "Ошибка обновления", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Обновленно успешно", Toast.LENGTH_SHORT).show();
+        }
+    }
+    void updateTask(String row_id, int complete){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        Log.d("Save", row_id + "");
+        cv.put(COLUMN_COMPLETE, complete);
+        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        if (result == -1) {
+            Toast.makeText(context, "Ошибка обновления", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Обновленно успешно", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 

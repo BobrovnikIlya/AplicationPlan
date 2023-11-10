@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +24,9 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private Context context;
-    private Activity activity;
     private ProgressFragment progressFragment;
+    private HomeFragment homeFragment;
+    private Activity activity;
     private Cursor cursor;
     private ArrayList nameTask, dateTask, idTask, descriptionTask, completeTask;
     CustomAdapter(Activity activity, Context context, ArrayList nameTask, ArrayList dateTask, ArrayList idTask, ArrayList descriptionTask){
@@ -37,6 +40,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
     CustomAdapter(ProgressFragment fragment, Context context, ArrayList nameTask, ArrayList dateTask, ArrayList idTask, ArrayList descriptionTask){
         this.progressFragment = fragment;
+        this.context = context;
+        this.nameTask = nameTask;
+        this.dateTask = dateTask;
+        this.descriptionTask = descriptionTask;
+        this.idTask = idTask;
+        Log.d("Custom adapter", "Конструктор");
+    }
+    CustomAdapter(HomeFragment fragment, Context context, ArrayList nameTask, ArrayList dateTask, ArrayList idTask, ArrayList descriptionTask){
+        this.homeFragment = fragment;
         this.context = context;
         this.nameTask = nameTask;
         this.dateTask = dateTask;
@@ -68,6 +80,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.name_txt.setText(String.valueOf(nameTask.get(position)));
         holder.date_txt.setText(String.valueOf(dateTask.get(position)));
+        if(homeFragment.check){
+            holder.checkBox.setChecked(true);
+        }else{
+            holder.checkBox.setChecked(false);
+        }
 
         if(MainActivity.numberFragment == 3) {
             holder.percent_txt.setText(String.valueOf(50 + "%")); //Просто чтобы с процентами работать
@@ -94,6 +111,21 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 }
             });
         }else{
+            holder.checkBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckBox checkBox = (CheckBox) v;
+                    MyDataBaseHelper myDB = new MyDataBaseHelper(context);
+                    if(checkBox.isChecked()){
+                        Log.d("Check", "Нажат");
+                        myDB.updateTask(idTask.get(position).toString(), 1);
+                    }else{
+                        Log.d("Check", "Не нажат");
+                        myDB.updateTask(idTask.get(position).toString(), 0);
+                    }
+                    homeFragment.storeDateInArrays();
+                }
+            });
             holder.mainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -114,9 +146,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView date_txt, name_txt, percent_txt;
+        CheckBox checkBox;
         LinearLayout mainLayout;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            checkBox = itemView.findViewById(R.id.complete_check);
             date_txt = itemView.findViewById(R.id.date_txt);
             name_txt = itemView.findViewById(R.id.name_txt);
             percent_txt = itemView.findViewById(R.id.percent_txt);

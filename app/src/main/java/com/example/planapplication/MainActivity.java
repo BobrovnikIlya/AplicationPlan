@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setNewFragment(calendarFragment);
     }
     private void setNewFragment(Fragment fragment) {
+        Log.d("setnew fragment", "Вошел");
         ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frame_layout, fragment);
         ft.addToBackStack(null);

@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     private MyDataBaseHelper myDB;
     Cursor cursor;
-    boolean check = false;
+    public boolean check = false;
     private Switch aSwitch;
     private CustomAdapter customAdapter;
     private ArrayList<String> nameTask, dateTask, idTask, descriptionTask, completeTask;
@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
         check = isChecked;
         storeDateInArrays();
     }
-    private void storeDateInArrays(){
+    public void storeDateInArrays(){
         idTask.clear();
         nameTask.clear();
         descriptionTask.clear();
@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
                 completeTask.add(cursor.getString(4));
             }
         }
-        customAdapter = new CustomAdapter(getActivity(), getContext(), nameTask, dateTask, idTask, descriptionTask);
+        customAdapter = new CustomAdapter(HomeFragment.this, getContext(), nameTask, dateTask, idTask, descriptionTask);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
